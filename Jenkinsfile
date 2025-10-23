@@ -3,13 +3,13 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-login')
-        DOCKER_IMAGE = 'your-dockerhub-username/quote-app'
+        DOCKER_IMAGE = 'vemularithika7/quote-app'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/yourusername/quote-of-the-day.git'
+                git branch: 'main', url: 'https://github.com/Rithika2284/quote-of-the-day.git'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-login', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                    sh 'echo $DOCKER_PASSWORD | docker login -u vemularithika7 --password-stdin'
                     sh 'docker push $DOCKER_IMAGE:latest'
                 }
             }
