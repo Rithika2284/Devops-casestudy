@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main', 
-                    url: 'https://github.com/Rithika2284/quote-of-the-day.git', 
+                    url: 'https://github.com/Rithika2284/Devops-casestudy.git', 
                     credentialsId: 'github-creds'
             }
         }
