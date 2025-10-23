@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE:latest .'
+                bat 'docker build -t $DOCKER_IMAGE:latest .'
             }
         }
 
@@ -25,7 +25,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-login', 
                                                   usernameVariable: 'DOCKER_USERNAME', 
                                                   passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh '''
+                    bat '''
                         echo "$DOCKER_PASSWORD" | docker login -u "vemularithika7" --password-stdin
                         docker push $DOCKER_IMAGE:latest
                     '''
@@ -35,7 +35,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh '''
+                bat '''
                     kubectl apply -f deployment.yaml
                     kubectl apply -f service.yaml
                 '''
