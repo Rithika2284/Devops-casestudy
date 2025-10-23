@@ -6,12 +6,14 @@ pipeline {
         DOCKER_IMAGE = 'vemularithika7/quote-app'
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Rithika2284/quote-of-the-day.git'
-            }
-        }
+   stage('Checkout') {
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/Rithika2284/quote-of-the-day.git',
+            credentialsId: 'github-creds'
+    }
+}
+
 
         stage('Build Docker Image') {
             steps {
